@@ -113,5 +113,11 @@
       "href": "https://partner.y-not.io"
     }
   },
-  "footer": {}
+  "footer": {},
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/documentation/introduction"
+    }
+  ]
 }
