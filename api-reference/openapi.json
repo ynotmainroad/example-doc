@@ -773,7 +773,7 @@
 
     "/v1/transaction": {
       "post": {
-        "description": "This call allows you to request creation of an exchange. You choose the coin pair you’d like to exchange, provide the sender’s withdrawal address, and specify the amount of coins you want to swap. WhyNotExchange returns the address and extra ID (if needed) for a deposit, final amount, fee, and other parameters.\n\n**To receive an affiliate fee from a transaction, the API query must include the following parameter: `affiliate_id`.**",
+        "description": "This call allows you to request creation of an exchange. You choose the coin pair you’d like to exchange, provide the sender’s withdrawal address, and specify the amount of coins you want to swap. YNOT returns the address and extra ID (if needed) for a deposit, final amount, fee, and other parameters.\n\n**To receive an affiliate fee from a transaction, the API query must include the following parameter: `affiliate_id`.**",
         "requestBody": {
           "description": "",
           "content": {
@@ -1370,7 +1370,7 @@
 
     "/v1/transaction/{id}": {
       "get": {
-        "description": "It gives detailed information about a single transaction. One of the returned parameters is `rate` which is the current rate offered by WhyNotExchange. It may differ from the market rate and change rapidly depending on the market situation.",
+        "description": "It gives detailed information about a single transaction. One of the returned parameters is `rate` which is the current rate offered by YNOT. It may differ from the market rate and change rapidly depending on the market situation.",
         "parameters": [{
           "in": "path",
           "name": "id",
@@ -1448,7 +1448,7 @@
             "items": {
               "type": "string"
             },
-            "description": "Transactions IDs array assigned by WhyNotExchange. \n\n Use it right way -  \n\n`?ids[]=be0c5f84ccc&ids[]=f8c6v4..`",
+            "description": "Transactions IDs array assigned by YNOT. \n\n Use it right way -  \n\n`?ids[]=be0c5f84ccc&ids[]=f8c6v4..`",
             "example": "599cd4bb4d4a5"
           },
           "required": true
@@ -2041,7 +2041,7 @@
             "type": "string"
           },
           "address_to": {
-            "description": "The destination address. WhyNotExchange will send the exchanged coins to this address",
+            "description": "The destination address. YNOT will send the exchanged coins to this address",
             "example": "0x5cE3606a2e9Eb....",
             "nullable": true,
             "type": "string"
@@ -2223,7 +2223,7 @@
             "type": "string"
           },
           "rate": {
-            "description": "The current exchange rate offered by WhyNotExchange",
+            "description": "The current exchange rate offered by YNOT",
             "example": "60102.709354577579216",
             "type": "string"
           },
@@ -2331,7 +2331,7 @@
             "type": "string"
           },
           "rate": {
-            "description": "The current exchange rate offered by WhyNotExchange",
+            "description": "The current exchange rate offered by YNOT",
             "example": "0.000290844400000",
             "type": "string"
           },
@@ -2428,7 +2428,7 @@
             "type": "string"
           },
           "rate": {
-            "description": "The current exchange rate offered by WhyNotExchange",
+            "description": "The current exchange rate offered by YNOT",
             "example": "60102.709354577579216",
             "type": "string"
           },
@@ -2525,7 +2525,7 @@
             "type": "string"
           },
           "rate": {
-            "description": "The current exchange rate offered by WhyNotExchange",
+            "description": "The current exchange rate offered by YNOT",
             "example": "0.000290844400000",
             "type": "string"
           },
@@ -2613,7 +2613,7 @@
             "type": "string"
           },
           "rate": {
-            "description": "The current exchange rate offered by WhyNotExchange",
+            "description": "The current exchange rate offered by YNOT",
             "example": "60102.709354577579216",
             "type": "string"
           },
@@ -2693,7 +2693,7 @@
             "type": "string"
           },
           "withdrawal_address": {
-            "description": "The destination address. WhyNotExchange will send the exchanged coins to this address. If you send NULL, you will get funds on `deposit_address`",
+            "description": "The destination address. YNOT will send the exchanged coins to this address. If you send NULL, you will get funds on `deposit_address`",
             "example": "0x7f20e5e4c7105acdfa3ef34bf56743....",
             "nullable": true,
             "type": "string"
@@ -2777,7 +2777,7 @@
             "type": "string"
           },
           "withdrawal": {
-            "description": "The destination address. WhyNotExchange will send the exchanged assets to this address",
+            "description": "The destination address. YNOT will send the exchanged assets to this address",
             "example": "0x7f20e5e4c7105acdfa3ef34bf56743....",
             "type": "string"
           },
@@ -2901,7 +2901,7 @@
             "type": "number"
           },
           "withdrawal": {
-            "description": "The destination address. WhyNotExchange will send the exchanged coins to this address",
+            "description": "The destination address. YNOT will send the exchanged coins to this address",
             "example": "TR7NHqjeKQxGTCi8q8ZY4txxxSzgjLj6t",
             "type": "string"
           },
@@ -3017,7 +3017,7 @@
             "type": "string"
           },
           "withdrawal": {
-            "description": "The destination address. WhyNotExchange will send the exchanged coins to this address",
+            "description": "The destination address. YNOT will send the exchanged coins to this address",
             "example": "TR7NHqjeKQxGTCi8q8ZY4txxxSzgjLj6t",
             "type": "string"
           },
@@ -3028,7 +3028,7 @@
             "type": "string"
           },
           "rate": {
-            "description": "The current exchange rate offered by WhyNotExchange",
+            "description": "The current exchange rate offered by YNOT",
             "example": "60186.054837423674181",
             "type": "string"
           },
@@ -3139,7 +3139,7 @@
             "type": "number"
           },
           "withdrawal": {
-            "description": "The destination address. WhyNotExchange will send the exchanged coins to this address",
+            "description": "The destination address. YNOT will send the exchanged coins to this address",
             "example": "TR7NHqjeKQxGTCi8q8ZY4txxxSzgjLj6t",
             "type": "string"
           },
@@ -3248,7 +3248,7 @@
             "type": "string"
           },
           "withdrawal": {
-            "description": "The destination address. WhyNotExchange will send the exchanged coins to this address",
+            "description": "The destination address. YNOT will send the exchanged coins to this address",
             "example": "TR7NHqjeKQxGTCi8q8ZY4txxxSzgjLj6t",
             "type": "string"
           },
@@ -3259,7 +3259,7 @@
             "type": "string"
           },
           "rate": {
-            "description": "The current exchange rate offered by WhyNotExchange",
+            "description": "The current exchange rate offered by YNOT",
             "example": "60186.054837423674181",
             "type": "string"
           },
@@ -3357,7 +3357,7 @@
             "type": "number"
           },
           "withdrawal": {
-            "description": "The destination address. WhyNotExchange will send the exchanged coins to this address",
+            "description": "The destination address. YNOT will send the exchanged coins to this address",
             "example": "TR7NHqjeKQxGTCi8q8ZY4txxxSzgjLj6t",
             "type": "string"
           },
@@ -3472,7 +3472,7 @@
             "type": "string"
           },
           "withdrawal": {
-            "description": "The destination address. WhyNotExchange will send the exchanged coins to this address",
+            "description": "The destination address. YNOT will send the exchanged coins to this address",
             "example": "TR7NHqjeKQxGTCi8q8ZY4txxxSzgjLj6t",
             "type": "string"
           },
@@ -3483,7 +3483,7 @@
             "type": "string"
           },
           "rate": {
-            "description": "The current exchange rate offered by WhyNotExchange",
+            "description": "The current exchange rate offered by YNOT",
             "example": "60186.054837423674181",
             "type": "string"
           },
@@ -3582,7 +3582,7 @@
             "type": "number"
           },
           "withdrawal": {
-            "description": "The destination address. WhyNotExchange will send the exchanged coins to this address",
+            "description": "The destination address. YNOT will send the exchanged coins to this address",
             "example": "TR7NHqjeKQxGTCi8q8ZY4txxxSzgjLj6t",
             "type": "string"
           },
@@ -3691,7 +3691,7 @@
             "type": "string"
           },
           "withdrawal": {
-            "description": "The destination address. WhyNotExchange will send the exchanged coins to this address",
+            "description": "The destination address. YNOT will send the exchanged coins to this address",
             "example": "TR7NHqjeKQxGTCi8q8ZY4txxxSzgjLj6t",
             "type": "string"
           },
@@ -3702,7 +3702,7 @@
             "type": "string"
           },
           "rate": {
-            "description": "The current exchange rate offered by WhyNotExchange",
+            "description": "The current exchange rate offered by YNOT",
             "example": "60186.054837423674181",
             "type": "string"
           },
@@ -3867,7 +3867,7 @@
             "type": "string"
           },
           "withdrawal": {
-            "description": "The destination address. WhyNotExchange will send the exchanged coins to this address",
+            "description": "The destination address. YNOT will send the exchanged coins to this address",
             "example": "TR7NHqjeKQxGTCi8q8ZY4txxxSzgjLj6t",
             "type": "string"
           },
@@ -3878,7 +3878,7 @@
             "type": "string"
           },
           "rate": {
-            "description": "The current exchange rate offered by WhyNotExchange",
+            "description": "The current exchange rate offered by YNOT",
             "example": "60186.054837423674181",
             "type": "string"
           },
@@ -4173,7 +4173,7 @@
             "type": "string"
           },
           "withdrawal": {
-            "description": "The destination address. WhyNotExchange will send the exchanged coins to this address",
+            "description": "The destination address. YNOT will send the exchanged coins to this address",
             "example": "TR7NHqjeKQxGTCi8q8ZY4txxxSzgjLj6t",
             "type": "string"
           },
@@ -4184,7 +4184,7 @@
             "type": "string"
           },
           "rate": {
-            "description": "The current exchange rate offered by WhyNotExchange",
+            "description": "The current exchange rate offered by YNOT",
             "example": "60186.054837423674181",
             "type": "string"
           },
@@ -4384,7 +4384,7 @@
             "type": "string"
           },
           "withdrawal": {
-            "description": "The destination address. WhyNotExchange will send the exchanged assets to this address",
+            "description": "The destination address. YNOT will send the exchanged assets to this address",
             "example": "0x7f20e5e4c7105acdfa3ef34bf56743....",
             "type": "string"
           },
