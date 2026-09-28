@@ -1,0 +1,63 @@
+---
+title: Introducing WhyNotExchange API
+description: ''
+---
+
+WhyNotExchange is the instant exchange platform supporting the largest number of cryptocurrencies in the market.
+
+The WhyNotExchange API gives our partners programmatic access to WhyNotExchange’s crypto exchange functionality,
+enabling seamless in-app centralized and decentralized (DeFi) crypto swaps, including cross-chain.
+
+This solution is ideal for crypto wallets, aggregators, portfolio apps, payment providers, and other crypto businesses.
+
+By integrating the WhyNotExchange API, you can:
+- Get an additional revenue stream through the affiliate program (including for DeFi swaps).
+- Expand the number of cryptocurrencies available for swaps.
+- Prevent exchange rate manipulations from other swap service providers.
+- Improve the reliability and flexibility of the crypto swap functionality.
+- Deepen liquidity access and tap into DeFi infrastructure.
+- Deliver a better user experience and increase user retention.
+
+
+# Basics
+
+1. For security reasons, all requests need to be executed using HTTPS.
+2. Requests with parameters such as “coin_from” or “coin_to” require a coin ticker in uppercase. Examples: “BTC,” “ETH,” “XMR.”
+3. “Extra ID” is an additional field for addresses of currencies that may use an additional ID for transaction processing, e.g.:
+    - XRP (XRP) uses an ID named "Destination Tag."
+    - Stellar (XLM) uses an ID named "Memo."
+4. This parameter should be filled only if the coin has this additional identifier. In any other case, this parameter is not filled out or sent.
+5. The list of supported cryptocurrencies is constantly growing as we add new coins.
+
+# Network features
+
+WhyNotExchange supports a wide range of networks. Some of them have specific requirements or limitations that may affect the exchange processing or the transaction result. These requirements are preferably displayed for users and considered by partners when integrating the API to ensure proper exchange handling in your app or service.
+
+Below are examples:
+- BEAM – Make sure your BEAM wallet is online for receiving.
+- FIRO – Please note that shielded transactions from hidden addresses can't be credited to the balance.
+- POLYX – Please note that your POLYX address needs to be verified with CDD to receive deposits.
+- FLOW – Please note that FLOW via EVM is not supported.
+- PIVX - Please note that shielded transactions from hidden addresses can't be retrieved/processed.
+
+All the necessary information is sent via API.
+
+This list is maintained and updated as new networks and rules are added.
+
+
+# Notes for DeFi API
+
+1. DeFi swaps are executed directly from the user's wallet and require signing transactions.
+2. For non-native tokens, a transaction approval is required **before** initiating a swap.
+3. Crypto assets can be specified by contract address and do not need to be listed in our default coin list.
+4. You can retrieve available networks and assets for DeFi swaps
+using **[api/v1/dex/networks](/api-reference/endpoint/v1/transaction/dex/networks)**
+and **[api/v1/dex/coins](/api-reference/endpoint/v1/transaction/dex/coins)**.
+
+
+<Card
+    title="Reference APIs"
+    icon="code"
+    href="/api-reference/introduction"
+>
+</Card>

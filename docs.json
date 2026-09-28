@@ -1,7 +1,7 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Mintlify Starter Kit",
+  "name": "WhyNot.exchange API",
   "colors": {
     "primary": "#16A34A",
     "light": "#07C983",
@@ -12,65 +12,106 @@
     "dark": "/images/favicon.svg"
   },
   "navigation": {
-    "pages": [
+    "tabs": [
       {
-        "group": "Getting Started",
-        "pages": [
-          "index",
-          "quickstart"
+        "tab": "Documentation",
+        "groups": [
+          {
+            "group": "Get Started",
+            "pages": [
+              "documentation/introduction",
+              "documentation/swap-flow",
+              "documentation/statuses",
+              "documentation/transaction-errors",
+              "documentation/affiliate-link",
+              "documentation/faq"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "API Reference",
+        "groups": [
+          {
+            "group": "API Documentation",
+            "pages": [
+              "api-reference/introduction",
+              "api-reference/authentication"
+            ]
+          },
+          {
+            "group": "REST API",
+            "pages": [
+              {
+                "group": "Coins",
+                "pages": [
+                  "api-reference/endpoint/v1/coins/coins",
+                  "api-reference/endpoint/v2/coins/coins",
+                  "api-reference/endpoint/v1/coins/info-bulk"
+                ]
+              },
+              {
+                "group": "Create Swap",
+                "pages": [
+                  "api-reference/endpoint/v1/coins/info",
+                  "api-reference/endpoint/v1/transaction/create-transaction",
+                  "api-reference/endpoint/v1/coins/info-revert",
+                  "api-reference/endpoint/v1/transaction/create-transaction-revert"
+                ]
+              },
+              {
+                "group": "Create Bridge",
+                "pages": [
+                  "api-reference/endpoint/v1/coins/bridge/info",
+                  "api-reference/endpoint/v1/transaction/bridge/create-transaction",
+                  "api-reference/endpoint/v1/coins/bridge/info-revert",
+                  "api-reference/endpoint/v1/transaction/bridge/create-transaction-revert"
+                ]
+              },
+              {
+                "group": "Create DEX",
+                "hidden": true,
+                "pages": [
+                  "api-reference/endpoint/v1/transaction/dex/coins",
+                  "api-reference/endpoint/v1/transaction/dex/networks",
+                  "api-reference/endpoint/v1/transaction/dex/quote",
+                  "api-reference/endpoint/v1/transaction/dex/swap",
+                  "api-reference/endpoint/v1/transaction/dex/get-swap-info"
+                ]
+              },
+              {
+                "group": "Get Transaction Info",
+                "pages": [
+                  "api-reference/endpoint/v1/transaction/get-transaction",
+                  "api-reference/endpoint/v1/transaction/get-transactions-list",
+                  "api-reference/endpoint/v2/transaction/get-transactions-list",
+                  "api-reference/endpoint/v1/transaction/get-transaction-status",
+                  "api-reference/endpoint/v1/transaction/transaction-check-promocode"
+                ]
+              }
+            ]
+          }
         ]
       }
-    ],
-    "global": {
-      "anchors": [
-        {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
-        }
-      ]
-    }
+    ]
   },
   "logo": {
     "light": "/images/new.png",
     "dark": "/images/new.png",
-    "href": "https://y-not.io/"
+    "href": "https://docs.y-not.io/"
   },
   "navbar": {
     "links": [
       {
         "label": "Support",
-        "href": "mailto:hi@mintlify.com"
+        "href": "mailto:b2b@y-not.io"
       }
     ],
     "primary": {
       "type": "button",
       "label": "Dashboard",
-      "href": "https://app.mintlify.com"
+      "href": "https://partner.y-not.io"
     }
   },
-  "contextual": {
-    "options": [
-      "copy",
-      "view",
-      "chatgpt",
-      "claude",
-      "perplexity",
-      "mcp",
-      "cursor",
-      "vscode"
-    ]
-  },
-  "footer": {
-    "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
-    }
-  }
+  "footer": {}
 }

@@ -1,0 +1,32 @@
+---
+title: 'Authentication'
+description: ''
+---
+
+Before calling the API, the account's API key needs to be generated to verify the partner's identity.
+[You can log in on the website](https://partner.y-not.io/auth/login) and generate it by going to the **API for developers** section.
+Learn more if you need more information.
+
+Each account can have **5 API keys**. Each key's permission configuration is independent of the others. We recommend giving each key a name to indicate its purpose.
+
+You can also add an **IP whitelist**, which allows the server to accept requests only from specified IPs. If the IP whitelist is not set, the server will skip client IP validation.
+
+<Note>
+To use the API key, each of your requests must contain an [Authorization header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Authorization):
+
+```json
+{
+    'headers': {
+        'Authorization': 'Bearer %API_KEY_STRING%'
+    }
+}
+```
+</Note>
+
+{/* <Warning> */}
+{/* Each API Key is limited by the number of requests: **400 requests in 1 minutes**. */}
+{/* </Warning> */}
+
+<Warning>
+If you received a response with [HTTP status code 403](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403), you have set an **incorrect API key** for the bearer token authorization.
+</Warning>

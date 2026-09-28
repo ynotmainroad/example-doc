@@ -1,0 +1,54 @@
+---
+title: 'F.A.Q.'
+description: ''
+---
+
+<Accordion title="Are there any restrictions on the direction of exchanges for some cryptocurrencies ?">
+    No, there are no such restrictions.
+
+    Each cryptocurrency has an `is_active` property.
+
+    <Note>
+    is_active:1 means a coin or token is fully available.
+    is_active: 0 means a cryptocurrency is not available.
+    </Note>
+
+    If a coin or token is available, a user can exchange it for any of the thousands of other cryptocurrencies on WhyNotExchange or exchange the cryptocurrencies he has for this coin.
+</Accordion>
+
+<Accordion title="I have generated several referral links (affiliate IDs) in my account. How can I set the custom fee for each of them ?">
+    Please get in touch with [our support team](https://y-not.io/contact) or your account manager.
+</Accordion>
+
+<Accordion title="Are there different affiliate IDs for each referral link ?">
+    Yes. Each referral link or crypto exchange widget is associated with a unique **affiliate_id**.
+</Accordion>
+
+<Accordion title="What happens after the exchange gets an overdue status ?">
+    An exchange becomes overdue **after 30 minutes** have passed since it was created. However, for API partners, we have expanded the actual waiting time for a deposit. Therefore, even after the exchange has received the overdue status, we will still accept a deposit and execute the exchange within **1.5 hours.**
+
+    However, we do not recommend allowing users to send deposits **after 30 minutes**. Due to high volatility, the final result of the exchange may not satisfy the user.
+
+    If we receive a deposit after more than **1.5 hours**, we cannot exchange it automatically because the exchange rate could have changed significantly during this time. In this case, we will ask you to clarify with the user his wishes about further actions. Possible options: start an exchange at the updated rate or make a refund.
+</Accordion>
+
+<Accordion title="Can we get smart contract addresses of EVM tokens via API ?">
+    Yes, we deliver all contract addresses for the list of coins via our API.
+
+    <Note>Please contact [our support team](https://y-not.io/contact) or your account manager if a contract address is unavailable for a specific cryptocurrency.</Note>
+</Accordion>
+
+<Accordion title="Can you provide unique addresses for each exchange ?">
+    For some cryptocurrencies, we can provide unique addresses for every exchange. If you need such a feature, please contact [our support team](https://y-not.io/contact) or your account manager
+</Accordion>
+
+<Accordion title="Are there any rate limits for API requests ?">
+    We limit the number of queries to **10 per second** for each partner. If you need more requests, please [contact us](https://y-not.io/contact).
+</Accordion>
+
+<Accordion title="What is the difference between 'deposit amount' and 'real deposit amount' and 'withdrawal amount' and 'real withdrawal amount' ?">
+    <Info>"deposit_amount" is the amount the user specified when creating the exchange and is supposed to send.</Info>
+    <Info>"real_deposit_amount" is the exact deposit amount sent by the user.</Info>
+    <Info>"withdrawal_amount" is the amount the user saw when creating the exchange.</Info>
+    <Info>"real_withdrawal_amount" is the exact amount received by the user.</Info>
+</Accordion>

@@ -1,0 +1,43 @@
+---
+title: Affiliate Program
+description: ''
+---
+
+WhyNotExchange partners who integrate the API receive income from every exchange their users make.
+
+The basic revenue share is **0.2%** of the exchange amount. However, partners can set a different revenue share depending on their business goals.
+
+To record a user’s exchange and calculate income for the partner, the **affiliate_id** parameter (also referred to as ref_id) must be included in API requests for **rate calculation** and **exchange creation**.
+
+If you work with multiple traffic sources, you can create multiple **affiliate_ids** – one for each source.
+
+All statistics on exchanges and income are available in your **personal account** on WhyNotExchange.
+
+# Using affiliate_id in the API
+
+Each API request must include:
+
+- your **affiliate_id**
+- your **API key**
+
+The **affiliate_id** identifies your transactions in our system so we can track your referrals and calculate your earnings.
+
+The **API key** is required to authenticate your requests and verify your identity.
+
+# How to create an affiliate_id
+
+1. Log in to your WhyNotExchange account.
+2. Go to the **Affiliate Program** section.
+3. In the **Referral links** menu, click **Create link**.
+4. After creating the link, it will appear in your list.
+5. Click on the link to view its ID – it will be displayed as:
+ **ref_id=XXX**. Need more information? – Visit this page.
+
+**XXX** will be the **affiliate_id** you must include in the rate calculation and exchange creation requests.
+
+# How to create an API key
+
+1. Go to [y-not.io](https://partner.y-not.io/auth/login) → **Account** → **API for developers** section.
+2. Click **Create new API key** to generate your key.
+3. Use this key in all API requests.
+

@@ -1,0 +1,36 @@
+---
+title: 'Introduction'
+description: ''
+---
+
+<Note>
+Base URL: **api.y-not.io/api**
+</Note>
+
+WhyNotExchange **API ver. 1** displays a list of cryptocurrencies in the form of coin codes and networks.
+
+WhyNotExchange **API ver. 2** displays an aggregated list of cryptocurrencies containing a list of networks for each specific coin.
+<Info>We recommend using **API ver.2**.</Info>
+
+<Warning>
+Note:
+- Some requests have parameters such as coin_from or coin_to, which represent the coin ticket in uppercase. Examples: BTC, ETH, XMR. This list is constantly growing as new coins are added.
+- All requests must be made using HTTPS as a security measure.
+- "Extra ID" is an additional field for addresses of currencies that may use an additional ID for transaction processing, e.g.:
+    - XRP (XRP) uses an ID named "Destination Tag."
+    - Monero (XMR) uses an ID named "Payment ID."
+    - Stellar (XML) uses an ID named "Memo."
+- This parameter should be filled only if the coin has this additional identifier. In any other case, this parameter is not filled out or sent.
+</Warning>
+
+<Note>
+    For **each request**, the following parameters must be used in the headers:
+    ```json
+    {
+        'headers': {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        }
+    }
+    ```
+</Note>

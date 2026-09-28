@@ -1,0 +1,31 @@
+---
+title: 'Swap flow'
+description: ''
+---
+Below is the exchange flow when using the WhyNotExchange API (centralized mode). The API Reference provides a detailed description of each request.
+
+
+<Steps>
+    <Step title="Get Coins List">
+        To calculate the rate and subsequently create an exchange, you need to make a pair of cryptocurrencies that will be exchanged.
+        You need to call the **[GET /api/v2/coins](/api-reference/endpoint/v2/coins/coins)** to get a list of coins to do this.
+        By selecting two cryptocurrencies from the list, you will form a pair.
+        <Note>Pay attention on `is_active` property.</Note>
+    </Step>
+    <Step title="Choose pair">
+        Choose two coins with `is_active: 1` in coin and network as a pair for rate calculation
+    </Step>
+    <Step title="Rate Calculation">
+        If you want to know the pair's rate in advance, use the **[POST /api/v1/info](/api-reference/endpoint/v1/coins/info)** request.
+        You can also create an exchange without first calculating the exchange rate. This feature is available for the floating (market) rate only.
+        For a fixed rate, you must first calculate the pair's rate and send the rate id.
+    </Step>
+    <Step title="Create Transaction">
+        If you accept the rate calculated in step 3, you can create an exchange.
+        Call API – Create transaction with **[POST /api/v1/transaction](/api-reference/endpoint/v1/transaction/create-transaction)**
+    </Step>
+    <Step title="Check Transaction Status">
+        The exchange processing involves changing statuses.
+        To track the status of your transaction, use  **[GET /api/v1/transaction/\{id\}](/api-reference/endpoint/v1/transaction/get-transaction)**
+    </Step>
+</Steps>

@@ -1,0 +1,215 @@
+---
+title: 'Swap flow (DeFi mode)'
+description: ''
+---
+With the WhyNotExchange DeFi API, you can easily add decentralized cross-chain swaps to your app.
+The API works with multiple blockchain networks. All swaps happen directly in the user's wallet.
+
+Using this mode, you’ll receive the same partner commission (in BTC) as you do for centralized
+exchanges. If you need a custom fee for DeFi swaps, please contact your B2B manager.
+
+Below is the exchange flow when using the WhyNotExchange DeFi API.
+
+To perform a DeFi exchange, you need to follow these steps:
+
+<Steps>
+    <Step>
+        Call **[GET /api/v1/dex/networks](/api-reference/endpoint/v1/transaction/dex/networks)** to get a list of available blockchain networks.
+    </Step>
+    <Step>
+        Call **[GET /api/v1/dex/coins](/api-reference/endpoint/v1/transaction/dex/coins)** to get a recommended list
+        of coins or use your own list. You can exchange any token by its contract address, even if it is not in our coin list.
+    </Step>
+    <Step>
+         Call **[POST /api/v1/dex/quote](/api-reference/endpoint/v1/transaction/dex/quote)** to get a quote rate.
+    </Step>
+    <Step>
+         Call **[POST /api/v1/dex/transaction](/api-reference/endpoint/v1/transaction/dex/swap)** to create an
+         exchange for receiving swap/approve payload data and an exchange identifier.
+    </Step>
+    <Step>
+         If the source token isn't the native one used to pay network fees (like ETH on Ethereum),
+         a user must permit its spending. To do that, he must sign the **approve** transaction from the previous
+         step and send it to the approval address provided. This lets the system know it can use tokens for the swap.
+    </Step>
+    <Step>
+         Sign the swap payload data obtained in step 4 using a wallet private key and send it
+         to the swap address in the source blockchain network.
+    </Step>
+    <Step>
+         Call **[GET /api/v1/dex/transaction/{id}](/api-reference/endpoint/v1/transaction/dex/get-swap-info)** to get
+         information about the progress of the exchange.
+    </Step>
+</Steps>
+
+
+# Example
+
+```js
+const { ethers } = require('ethers');
+const axios = require('axios').default;
+
+const whynotApiKey = '...';
+
+const myAddress = '...';
+const myPrivKey = '...';
+
+const rpcUrl = '...';
+
+const http = axios.create({
+    baseURL: 'https://api.y-not.io',
+    headers: { Authorization: 'Bearer ' + whynotApiKey },
+});
+
+(async () => {
+    const networks = await http.get('/api/v1/dex/networks');
+
+    const networkFrom = networks.data.find((network) => network.code === 'BASE');
+    const networkTo = networks.data.find((network) => network.code === 'BEP20');
+
+    console.log(networkFrom);
+    console.log(networkTo);
+
+    const coins = await http.get('/api/v2/coins');
+
+    const coinFrom = coins.data.find((coin) => coin.code === 'USDC');
+    const coinFromNetwork = coinFrom.networks.find((network) => network.code === networkFrom.code);
+
+    const coinTo = coins.data.find((coin) => coin.code === 'USDC');
+    const coinToNetwork = coinTo.networks.find((network) => network.code === networkTo.code);
+
+    console.log(coinFromNetwork);
+    console.log(coinToNetwork);
+
+    const quoteRequest = {
+        affiliate_id: null,
+        asset_from: coinFromNetwork.contract_address ?? 'NATIVE',
+        asset_to: coinToNetwork.contract_address ?? 'NATIVE',
+        network_from: coinFromNetwork.chain_id, // or networkFrom.uuid
+        network_to: coinToNetwork.chain_id,
+        amount: '100',
+        address_from: myAddress,
+        address_to: myAddress,
+    };
+
+    console.log('quoteRequest:', quoteRequest);
+
+    const quote = await http.post('api/v1/dex/quote', quoteRequest);
+
+    console.log('quoteRequest:', quote.data);
+
+   const swapRequest = {
+        affiliate_id: 'G0wqz01k3kZdHsdu', //null
+        asset_from: coinFromNetwork.contract_address ?? 'NATIVE',
+        asset_to: coinToNetwork.contract_address ?? 'NATIVE',
+        network_from: coinFromNetwork.chain_id, //or networkFrom.uuid
+        network_to: coinToNetwork.chain_id,
+        deposit_amount: '100',
+        sender_address: myAddress,
+        withdrawal_address: myAddress,
+    };
+    console.log('swapRequest:', swapRequest);
+
+    const swap = await http.post('api/v1/dex/transaction', swapRequest);
+
+    console.log('swapResponse:', swap.data);
+
+    const provider = new ethers.providers.StaticJsonRpcProvider({
+        url: rpcUrl,
+    });
+
+    const wallet = new ethers.Wallet(myPrivKey, provider);
+
+    const gasPrice = await provider.getGasPrice();
+    console.log('gasPrice:', gasPrice.toString());
+
+    const ERC20_ABI = [
+        'function balanceOf(address owner) view returns (uint256)',
+        'function decimals() view returns (uint8)',
+        'function transfer(address to, uint256 amount) returns (bool)',
+        'function symbol() view returns (string)',
+        'function approve(address spender, uint256 amount) returns (bool)',
+        'function allowance(address owner, address spender) view returns (uint256)',
+    ];
+
+    // approve
+    if (swap && swap.data.deposit.approve_address) {
+        const tokenContract = new ethers.Contract(swap.data.coin_from_contract_address, ERC20_ABI, provider);
+
+        const tokenDecimals = Number(await tokenContract.decimals());
+        console.log('tokenDecimals:', tokenDecimals);
+        const approveAmount = ethers.utils.parseUnits(swap.data.deposit_amount, tokenDecimals);
+        console.log('approveAmount:', approveAmount);
+
+        const approveData = await tokenContract.populateTransaction.approve(
+            swap.data.deposit.approve_address,
+            approveAmount,
+        );
+        console.log('approveData:', approveData);
+
+        const gasLimitApprove = (await provider.estimateGas({from: myAddress, ...approveData})).mul('120').div('100'); //add 20% to gasLimit for guaranteed execution
+        console.log('approve gasLimit:', gasLimitApprove.toString());
+
+        const approveTx = {
+            from: myAddress,
+            to: approveData.to,
+            data: approveData.data,
+            gasPrice,
+            gasLimit: gasLimitApprove,
+            chainId: (await provider.getNetwork()).chainId,
+            nonce: await provider.getTransactionCount(myAddress),
+        };
+        console.log('approveTx:', approveTx);
+
+        const signedApproveTx = await wallet.signTransaction(approveTx);
+
+        console.log('approveTxSigned:', signedApproveTx);
+
+        const approve = await provider.sendTransaction(signedApproveTx);
+
+        console.log('approveHash:', approve.hash);
+
+        await approve.wait(1);
+
+        console.log('approve success');
+    }
+    // approve end
+
+    //swap
+
+    const swapTxData = {
+        chainId: (await provider.getNetwork()).chainId,
+        nonce: await provider.getTransactionCount(myAddress),
+        gasLimit: ethers.BigNumber.from('2000000').toHexString(),
+        gasPrice: gasPrice,
+        from: myAddress,
+        to: swap.data.deposit.send_address,
+        value: ethers.BigNumber.from(swap.data.deposit.value).toHexString(),
+        data: swap.data.deposit.data,
+    };
+    console.log('swapTxData', swapTxData);
+
+    const gasLimitSwap = await provider.estimateGas(swapTxData);
+    swapTxData.gasLimit = gasLimitSwap.mul(120).div(100);
+    console.log('gasLimitSwap', swapTxData.gasLimit.toString());
+
+    const signedSwapTx = await wallet.signTransaction(swapTxData);
+
+    console.log('signedSwapTx:', signedSwapTx);
+
+    const swapTx = await provider.sendTransaction(signedSwapTx);
+
+    console.log('swapTxHash:', swapTx.hash);
+
+    await swapTx.wait(1);
+
+    console.log('swap success');
+
+    //swap end
+
+    const result = await http.get(`api/v1/dex/transaction/${swap.data.transaction_id}`);
+
+    console.log(result.data);
+})();
+
+```

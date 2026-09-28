@@ -1,0 +1,61 @@
+---
+title: 'Transaction statuses'
+description: ''
+---
+
+WhyNotExchange processes 98% of all transactions automatically. Depending on the selected cryptocurrencies, the average transaction time ranges from 5 to 40 minutes.
+
+
+We recommend notifying users about the expected time of the exchange and showing them statuses to demonstrate that an exchange process is ongoing.
+
+
+It is also advisable to inform users that if an exchange lasts longer than the specified period or there is an error, they can contact support.
+
+
+### <Icon icon="bookmark" iconType="regular" color="#0ea5e9" size={20} /> wait
+> A user selects cryptocurrencies for exchange, indicates the amount, and confirms the operation. To proceed with the transaction, the user has to send the indicated amount to the deposit address.
+<Note>The user has up to 30 minutes to send funds. If funds are not sent during this period, the exchange goes into Overdue status.</Note>
+<br />
+
+### <Icon icon="bookmark" iconType="regular" color="#d1ae42" size={20} /> confirmation
+> The user’s funds transfer appears in a mempool. WhyNotExchange is now waiting for the necessary number of network confirmations to start processing a swap.
+<Note>Note that the number of confirmations in the network depends on the specifics of a cryptocurrency's blockchain.</Note>
+
+### <Icon icon="bookmark" iconType="regular" color="#d1ae42" size={20} /> confirmed
+> The transfer of user funds to the specified address is confirmed in the blockchain network.
+
+### <Icon icon="bookmark" iconType="regular" color="#d1ae42" size={20} /> exchanging
+> WhyNotExchange is processing an exchange.
+<br />
+
+### <Icon icon="bookmark" iconType="regular" color="#55d799" size={20} /> sending
+> The exchanged funds are being sent to the recipient's address.
+
+### <Icon icon="bookmark" iconType="regular" color="#55d799" size={20} /> sending_confirmation
+> Sending of exchanged funds to the user is waiting for network confirmations.
+
+### <Icon icon="bookmark" iconType="regular" color="#55d799" size={20} /> success
+> The exchange is completed. The funds are successfully sent to the recipient’s address.
+<br />
+
+### <Icon icon="bookmark" iconType="regular" color="#ea5e5e" size={20} /> aml_check_failed
+> The deposit was marked as risky by the AML check service.
+WhyNotExchange uses the services of leading AML providers for automatic AML verification. These providers assess risks according to a generally accepted risk table.
+In the response about an error due to high AML risks, we pass a list of signals and the percentage for each signal – "aml_error_signals."
+You must decide whether to display this information to the user.
+
+### <Icon icon="bookmark" iconType="regular" color="#ea5e5e" size={20} /> overdue
+> The deposit receiving time for this transaction has expired.
+<Note>The time to send a deposit is limited to **30 minutes**. This is necessary to avoid unacceptable exchange rate fluctuations due to market volatility.</Note>
+
+
+### <Icon icon="bookmark" iconType="regular" color="#ea5e5e" size={20} /> error
+> The transaction failed. The reason for the error may vary. However, in most cases, the amount sent differs from the amount specified when creating the transaction.
+In case of an error, you can contact the [WhyNotExchange support service](https://y-not.io/contact), which is **available 24/7**.
+To get a response asap, we need information about the Exchange ID, the response you received via the API, and the request to which the response was received.
+
+
+### <Icon icon="bookmark" iconType="regular" color="#ea5e5e" size={20} /> refund
+> The transaction failed. The funds were returned to the user's address, which he sent them from.
+<Note>Please note that funds are not refunded automatically. Contacting the WhyNotExchange support is mandatory.</Note>
+
