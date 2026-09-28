@@ -1,24 +1,26 @@
 ---
-title: WhyNotExchange DeFi API [OLD-DEPRECATED]
-description: ''
+title: "WhyNotExchange DeFi API [OLD-DEPRECATED]"
 ---
 
 # What is the WhyNotExchange DeFi API?
+
 The WhyNotExchange DeFi API allows you to integrate decentralized cross-chain swaps and liquidity management into your application, platform, or protocol. We have prepared a single simple and convenient API interface for interaction with multiple blockchain networks with all the necessary data. As befits the traditional DEX protocol, the coin exchange operation takes place in the user's wallet.
 
 # Fees
+
 The WhyNotExchange DeFi API now provides an opportunity to earn for our affiliate partners. You will be credited with the same percentage of earnings in BTC as for regular exchanges to your balance in a personal account. If you need an individual percentage, welcome to our B2B manager.
 
 # Swap Workflow Using the WhyNotExchange DeFi API
+
 In order to perform a DeFi exchange, you need to follow several steps listed below:
 
-1. Call **[api/v1/dex/networks](/api-reference/endpoint/v1/transaction/dex/networks)**  to get a list of available blockchain networks.
-2. Call **[api/v1/dex/coins](/api-reference/endpoint/v1/transaction/dex/coins)** to get a recommended list of coins or use your own list. You can exchange any token by its contract address, even if it is not in our coin list.
-3. Call **[api/v1/dex/quote](/api-reference/endpoint/v1/transaction/dex/quote)** to get a quote rate.
-4. Call **[api/v1/dex/transaction](/api-reference/endpoint/v1/transaction/dex/swap)** to create an exchange for receiving swap/approve payload data and an exchange identifier.
+1. Call [**api/v1/dex/networks**](/api-reference/endpoint/v1/transaction/dex/networks)  to get a list of available blockchain networks.
+2. Call [**api/v1/dex/coins**](/api-reference/endpoint/v1/transaction/dex/coins) to get a recommended list of coins or use your own list. You can exchange any token by its contract address, even if it is not in our coin list.
+3. Call [**api/v1/dex/quote**](/api-reference/endpoint/v1/transaction/dex/quote) to get a quote rate.
+4. Call [**api/v1/dex/transaction**](/api-reference/endpoint/v1/transaction/dex/swap) to create an exchange for receiving swap/approve payload data and an exchange identifier.
 5. If the source token is not a native gas token (e.g., ERC-20 tokens on EVM chains), sign approve payload data in the previous step and send to the approve address in the source blockchain network to allow spending the user's tokens.
 6. Sign the swap payload data obtained in step 4 using a wallet private key and send to the swap address in the source blockchain network.
-7. Call **[api/v1/dex/transaction/{id}](/api-reference/endpoint/v1/transaction/dex/get-swap-info)** to get information about the progress of the exchange.
+7. Call [**api/v1/dex/transaction/**](/api-reference/endpoint/v1/transaction/dex/get-swap-info){id} to get information about the progress of the exchange.
 
 # Example
 
@@ -189,5 +191,4 @@ const http = axios.create({
 
     console.log(result.data);
 })();
-
 ```
